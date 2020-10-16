@@ -1,0 +1,46 @@
+html {
+   background: rgb(196,196,196);
+   background: linear-gradient(#9198e5, #ff8000);
+}
+
+li {
+    background: #9198e5;
+    border-radius: 20px;
+}
+
+#screenarea{
+    
+    background-color:#000000;
+    margin: auto;
+    width: 50%;
+    height: 90%;
+    overflow-y: scroll;
+        
+}
+
+#list_element{
+    text-align: center;
+        
+}
+#inputArea{
+   width: 100%;
+   position: absolute; bottom: 1; left: 124;
+  /*
+  position: relative;
+  top: 150px;
+  */
+}
+
+#count_header{
+    color: white;
+}
+/*
+#chatarea{
+    
+    overflow-y: scroll;
+    width: 50%;
+    height: 100px;
+    }
+    */
+    
+
