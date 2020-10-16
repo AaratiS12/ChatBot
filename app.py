@@ -159,9 +159,9 @@ def on_new_number(data):
         bot_response = bot_response_api(message)
         add_to_db_and_emit("Bot: "+bot_response)
         
-    socketio.emit('text received', {
-        'text': bot_response
-    })    
+        socketio.emit('text received', {
+            'text': "Bot: "+ bot_response
+        })    
    
     
 if __name__ == '__main__': 
