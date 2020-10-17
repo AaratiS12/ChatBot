@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Linkify from 'react-linkify';
 
 export function Li (props) {
    
@@ -19,5 +20,5 @@ export function Li (props) {
     return <li id={props.id} >{username}: <img src={messageWOname} width="40" height="40"/></li>;
     }
     
-    return <li id={props.id} >{props.msg}</li>;
+    return <Linkify><li id={props.id} >{props.msg}</li> </Linkify>;
 }
