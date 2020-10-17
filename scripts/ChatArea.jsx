@@ -7,7 +7,7 @@ import Linkify from 'react-linkify';
 export function ChatArea (props) {
     
     const [texts, updateTexts] = useState( () => {return [];} );
-    const [user_name, update_Username] = useState( () => {return "uname";} );
+    const [user_name, update_Username] = useState( () => {return "";} );
     
    
     function addText(text){
@@ -35,14 +35,16 @@ export function ChatArea (props) {
     return (
        
         <div id="chatarea">
+        {texts.text}
         <Linkify>
+        
       <ol>
       {
-          texts.map(
-            (message,index)=><li id="list_element" key={index}>{message}</li>    )
+        texts.map((message,index)=><Li id="list_element" key={index}  msg={message} />)
       }
       </ol>
       </Linkify>
+    
         </div>
        
         )

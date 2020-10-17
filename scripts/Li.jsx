@@ -1,5 +1,23 @@
 import * as React from 'react';
 
 export function Li (props) {
-    return <li>{props.value}</li>;
+   
+    let m = props.msg
+    let indexOf = m.indexOf(":");
+    let username = m.substring(0,indexOf);
+    let messageWOname = m.substring(indexOf+2, m.length);
+    let lastFour = messageWOname.substr(messageWOname.length - 4);
+    let Isimage = null
+     if (lastFour == ".png" || lastFour==".gif" || lastFour==".jpg"){
+        Isimage = true
+     }
+    else{
+        Isimage = false
+    }
+    
+    if(Isimage){
+    return <li id={props.id} >{username}: <img src={messageWOname} width="40" height="40"/></li>;
+    }
+    
+    return <li id={props.id} >{props.msg}</li>;
 }

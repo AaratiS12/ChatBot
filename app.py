@@ -95,6 +95,7 @@ def emit_all_from_database(channel):
         db_message.message for db_message in
         db.session.query(chatDB.chat_messages).all()        
          ]
+    print(all_messages)
     socketio.emit(channel, {
         'text': all_messages})
  
@@ -120,8 +121,6 @@ def on_connect():
         'connection': count
     })
     print("connection status sent to user")
-    
-    
     #Creates a random username
     random_animal = randomAnimal(used_animal_names)
     used_animal_names.add(random_animal)
@@ -131,6 +130,7 @@ def on_connect():
     }, sid)
     #Assigns sid to username
     username_sid[sid] = user_name
+    emit_all_from_database('text received')
    
    
 @socketio.on('disconnect')
@@ -157,20 +157,27 @@ def on_new_number(data):
     sid = request.sid
     print("Got an event for new number with data:", data)
     message = data['new message']
+    
     if message != "":
         msg = username_sid[sid] + ": " + message
         add_to_db_and_emit(msg)
-    
+        
     socketio.emit('text received', {
+        'uname': username_sid[sid] ,
         'text': msg
     }) 
     if message[0:2] == '!!':
         bot_response = bot_response_api(message)
         add_to_db_and_emit("Bot: "+bot_response)
-        
         socketio.emit('text received', {
             'text': "Bot: "+ bot_response
-        })    
+        }) 
+    elif message[-4:] ==".png" or message[-4:] ==".gif" or message[-4:] ==".jpg":
+        bot_response = ""
+        # add_to_db_and_emit(bot_response)
+        # socketio.emit('text received', {
+        #     'text': bot_response
+        # })    
    
     
 if __name__ == '__main__': 
