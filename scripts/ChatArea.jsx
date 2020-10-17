@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Li} from "./Li";
 import { Socket } from './Socket';
+import Linkify from 'react-linkify';
 
 
 export function ChatArea (props) {
@@ -34,12 +35,14 @@ export function ChatArea (props) {
     return (
        
         <div id="chatarea">
+        <Linkify>
       <ol>
       {
           texts.map(
             (message,index)=><li id="list_element" key={index}>{message}</li>    )
       }
       </ol>
+      </Linkify>
         </div>
        
         )
