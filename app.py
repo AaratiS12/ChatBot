@@ -131,7 +131,7 @@ def on_connect():
     }, sid)
     #Assigns sid to username
     username_sid[sid] = user_name
-    emit_all_from_database('text received')
+   
    
 @socketio.on('disconnect')
 def on_disconnect():
@@ -142,7 +142,16 @@ def on_disconnect():
         'connection': count
     })
     
-
+@socketio.on('new google user')
+def on_new_google_user(data):
+    sid = request.sid
+    print("Got an event for new google user input with data:", data)
+    socketio.emit('google user', {
+        'connection': "google"
+    }, sid)
+    #push_new_user_to_db(data['name'], models.AuthUserType.GOOGLE)
+    emit_all_from_database('text received')
+    
 @socketio.on('new message')
 def on_new_number(data):
     sid = request.sid

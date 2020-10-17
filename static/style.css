@@ -8,39 +8,37 @@ li {
     border-radius: 20px;
 }
 
-#screenarea{
-    
+#chatarea{
+    position: static;
     background-color:#000000;
     margin: auto;
-    width: 50%;
-    height: 90%;
+    width: 70%;
+    height: 75%;
     overflow-y: scroll;
         
+}
+#inputArea{
+    text-align: center;  
+    position: static;
+    margin:0 auto;
+    display:block;
 }
 
 #list_element{
     text-align: center;
-        
-}
-#inputArea{
-   width: 100%;
-   position: absolute; bottom: 1; left: 124;
-  /*
-  position: relative;
-  top: 150px;
-  */
+    font-family: cursive;
 }
 
 #count_header{
-    color: white;
+    color: black;
+    font-family: cursive;
 }
-/*
-#chatarea{
+
+#screenarea{
+    position: static;
+    margin: auto;
+    font-family: cursive;
     
-    overflow-y: scroll;
-    width: 50%;
-    height: 100px;
-    }
-    */
+}
     
 

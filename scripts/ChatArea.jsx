@@ -8,8 +8,6 @@ export function ChatArea (props) {
     const [texts, updateTexts] = useState( () => {return [];} );
     const [user_name, update_Username] = useState( () => {return "uname";} );
     
-    const [messages, updateMessages] = React.useState([]);
-    const [count, updateCount] = React.useState(0);
    
     function addText(text){
         updateTexts((oldList) => oldList.concat(text));
@@ -23,13 +21,7 @@ export function ChatArea (props) {
             })
         }, []);  
     
-         React.useEffect(() => {
-            Socket.on('messages received', (data) => {
-                console.log("Received message from server: " + data['allMessages']);
-                updateMessages(data['allMessages']);
-            })
-        }, []); 
-        
+    
         React.useEffect(() => {
             Socket.on('text received', (data) => {
                 console.log("Received text from server: " + data['text']);
@@ -37,12 +29,6 @@ export function ChatArea (props) {
             })
         }, []); 
         
-        React.useEffect(() => {
-            Socket.on('connection', (data) => {
-                console.log("Received connection status from server: " + data['connection']);
-                updateCount(data['connection']);
-            })
-        }, []); 
     }
     newNumber();
     return (
