@@ -130,18 +130,18 @@ username = ""
 def on_new_google_user(data):
     sid = request.sid
     print("Got an event for new google user input with data:", data)
+    global username
+    username = data['name']
     socketio.emit('google user', {
-        'connection': "google"
+        'username': username
     }, sid)
     socketio.emit('connection', {
         'connection': count
     })
-    print("connection status sent to user")
-    global username
-    username = data['name']
-    socketio.emit('user name', {
-        'username': username
+    socketio.emit('chatArea', {
+        'uname': username
     }, sid)
+    print("connection status sent to user")
     #push_new_user_to_db(data['name'], models.AuthUserType.GOOGLE)
     emit_all_from_database('text received', sid)
     

@@ -24,7 +24,13 @@ li {
     display:block;
 }
 
-#list_element{
+#left_list_element{
+    text-align: center;
+    font-family: cursive;
+    position: relative;
+    right: 40px;
+}
+#right_list_element{
     text-align: center;
     font-family: cursive;
 }
@@ -38,7 +44,6 @@ li {
     position: static;
     margin: auto;
     font-family: cursive;
-    
 }
     
 

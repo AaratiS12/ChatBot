@@ -16,9 +16,18 @@ export function Li (props) {
         Isimage = false
     }
     
-    if(Isimage){
-    return <li id={props.id} >{username}: <img src={messageWOname} width="40" height="40"/></li>;
-    }
     
-    return <Linkify><li id={props.id} >{props.msg}</li> </Linkify>;
-}
+    
+    if (Isimage) {
+        if(props.user !== username){
+        return <li id="left_list_element">{username}: <img src={messageWOname} width="40" height="40"/></li>;
+    }
+        return <li id="right_list_element">{username}: <img src={messageWOname} width="40" height="40"/></li>;
+     
+    }
+    else {
+        if(props.user !== username){
+        return <li  id="left_list_element">{props.msg}</li>;
+        }
+        return <Linkify><li id="right_list_element" >{props.msg}</li> </Linkify>;
+    }}

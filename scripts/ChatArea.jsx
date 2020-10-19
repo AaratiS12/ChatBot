@@ -12,11 +12,11 @@ export function ChatArea (props) {
         updateTexts((oldList) => oldList.concat(text));
     }
    
-   function newNumber() {
+   function newData() {
          React.useEffect(() => {
-            Socket.on('user name', (data) => {
-                console.log("Received username from server: " + data['username']);
-                update_Username(data['username']);
+            Socket.on('chatArea', (data) => {
+                console.log("Received google username from server: " + data['uname']);
+                update_Username(data['uname']);
             })
         }, []);  
     
@@ -27,15 +27,13 @@ export function ChatArea (props) {
                 addText(data['text']);
             })
         }, []); 
-        
     }
-    newNumber();
+    newData();
     return (
-       
         <div id="chatarea">
       <ol>
       {
-        texts.map((message,index)=><Li id="list_element" key={index}  msg={message} />)
+        texts.map((message,index)=><Li key={index}  msg={message} user={user_name}/>)
       }
       </ol>
         </div>

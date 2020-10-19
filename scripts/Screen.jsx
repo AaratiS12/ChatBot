@@ -18,7 +18,7 @@ export function Screen () {
         
         React.useEffect(() => {
             Socket.on('google user', (data) => {
-                console.log("Received google login from server: " + data['connection']);
+                console.log("Received google login from server: " + data['username']);
                 updateLogin(true);
             })
         }, []); 
