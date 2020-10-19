@@ -33,12 +33,15 @@ If you see any error messages, make sure you use sudo pip or sudo npm. If it say
 26) Open the file in vim: sudo vim /var/lib/pgsql9/data/pg_hba.conf
 27) Run :%s/ident/md5/g to Replace all values of ident with md5
 28) Run sudo service postgresql restart
-29) Run npm run watch in one terminal (The program should not stop running. Leave it running.) If this step fails for whatever reason, please close your terminal and restart it, and re-run the command.
-30) Open a new terminal and run python app.py
-31) Make sure you hard refresh (Ctrl+R/Cmd+Shift+R) for HTML changes you make
-32) One issue I had was getting the username to display with the texts. This is because when I called it from the state variable in Javascript, it showed as 
+29) Run npm install react-linkify --save
+30) Run pip install googletrans
+31) Run npm install react-google-login
+32) Run npm run watch in one terminal (The program should not stop running. Leave it running.) If this step fails for whatever reason, please close your terminal and restart it, and re-run the command.
+33) Open a new terminal and run python app.py
+34) Make sure you hard refresh (Ctrl+R/Cmd+Shift+R) for HTML changes you make
+35) One issue I had was getting the username to display with the texts. This is because when I called it from the state variable in Javascript, it showed as 
 [Object object] but showed correctly in the return statement. When I looked it up online it said useEffect doesn't immediately update the state variables.
 Another issue I had was creating a new database, because I was using Models.py at first. When I made my own I tried to make it as similar to Models as I could,and the datatypes were too small to hold the messages so it was throwing some errors which I fixed
-33) I ran in to multiple technical errors during this project. When deploying to heroku the page could not read my script.js file. The reason for this was that my script.js file was in my .gitignore. However when I tried uploading my changes to heroku it was giving me another error about not having societio dependecncy. But it was wokring before that so I was confused why it had this issue all of a sudden. I ended up going through a couple steps but I had to manually add that dependency in my package.json, and also delete --watch from line 7 of it, becuase it was take a long time to upload to heroku otherwise
+36) I ran in to multiple technical errors during this project. When deploying to heroku the page could not read my script.js file. The reason for this was that my script.js file was in my .gitignore. However when I tried uploading my changes to heroku it was giving me another error about not having societio dependecncy. But it was wokring before that so I was confused why it had this issue all of a sudden. I ended up going through a couple steps but I had to manually add that dependency in my package.json, and also delete --watch from line 7 of it, becuase it was take a long time to upload to heroku otherwise
 Another technical issue I overcame was was my git was pulling from an old repo even though it was set to a new repo. It was pulling multiple copies of a file, and also pulling a file I had deleted several commits ago. I fixed this by deleting my entire folder and creating a new one.
 
