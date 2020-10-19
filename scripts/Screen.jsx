@@ -7,7 +7,7 @@ import {GoogleButton} from './GoogleButton'
 export function Screen () {
     
     const [count, updateCount] = React.useState(0);
-    const [isLoggedIn, updateLogin] = React.useState(true);
+    const [isLoggedIn, updateLogin] = React.useState(false);
     function newNumber() {
         React.useEffect(() => {
             Socket.on('connection', (data) => {

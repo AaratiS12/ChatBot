@@ -90,49 +90,33 @@ def randomAnimal(used_animal_names):
     return random_animal
     
 #Emits the select * database query
-def emit_all_from_database(channel):
+def emit_all_from_database(channel, sid):
     all_messages = [
         db_message.message for db_message in
         db.session.query(chatDB.chat_messages).all()        
          ]
     print(all_messages)
     socketio.emit(channel, {
-        'text': all_messages})
+        'text': all_messages}, sid)
  
 def add_to_db_and_emit(text):
     db.session.add(chatDB.chat_messages(text));
     db.session.commit();
-    emit_all_from_database('messages received')
+    #emit_all_from_database('messages received')
         
 @app.route('/')
 def hello():
     return flask.render_template('index.html')
 
-username_sid = {}
-used_animal_names = set()
+
 count = 0
 @socketio.on('connect')
 def on_connect():
     global count
     count += 1
     print('Someone connected!')
-    sid = request.sid
-    socketio.emit('connection', {
-        'connection': count
-    })
-    print("connection status sent to user")
-    #Creates a random username
-    random_animal = randomAnimal(used_animal_names)
-    used_animal_names.add(random_animal)
-    user_name = "anonymous_" + random_animal
-    socketio.emit('user name', {
-        'username': user_name
-    }, sid)
-    #Assigns sid to username
-    username_sid[sid] = user_name
-    emit_all_from_database('text received')
    
-   
+
 @socketio.on('disconnect')
 def on_disconnect():
     global count
@@ -141,7 +125,7 @@ def on_disconnect():
     socketio.emit('connection', {
         'connection': count
     })
-    
+username = ""    
 @socketio.on('new google user')
 def on_new_google_user(data):
     sid = request.sid
@@ -149,21 +133,30 @@ def on_new_google_user(data):
     socketio.emit('google user', {
         'connection': "google"
     }, sid)
+    socketio.emit('connection', {
+        'connection': count
+    })
+    print("connection status sent to user")
+    global username
+    username = data['name']
+    socketio.emit('user name', {
+        'username': username
+    }, sid)
     #push_new_user_to_db(data['name'], models.AuthUserType.GOOGLE)
-    emit_all_from_database('text received')
+    emit_all_from_database('text received', sid)
     
 @socketio.on('new message')
-def on_new_number(data):
+def on_new_data(data):
     sid = request.sid
-    print("Got an event for new number with data:", data)
+    print("Got an event for data:", data)
     message = data['new message']
-    
+    global username
     if message != "":
-        msg = username_sid[sid] + ": " + message
+        msg = username + ": " + message
         add_to_db_and_emit(msg)
         
     socketio.emit('text received', {
-        'uname': username_sid[sid] ,
+       #DELETE 'uname': username ,
         'text': msg
     }) 
     if message[0:2] == '!!':
@@ -172,13 +165,7 @@ def on_new_number(data):
         socketio.emit('text received', {
             'text': "Bot: "+ bot_response
         }) 
-    elif message[-4:] ==".png" or message[-4:] ==".gif" or message[-4:] ==".jpg":
-        bot_response = ""
-        # add_to_db_and_emit(bot_response)
-        # socketio.emit('text received', {
-        #     'text': bot_response
-        # })    
-   
+ 
     
 if __name__ == '__main__': 
     socketio.run(
