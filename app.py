@@ -13,16 +13,15 @@ import json
 from googletrans import Translator
 translator = Translator()
  
-#Initializing things
+#Initializing
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 socketio.init_app(app, cors_allowed_origins="*")
 dotenv_path = join(dirname(__file__), 'sql.env')
 load_dotenv(dotenv_path)
 
-database_uri = os.environ['DATABASE_URL']
-    
 #Initializing database
+database_uri = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
 db = flask_sqlalchemy.SQLAlchemy(app)
 db.init_app(app)
@@ -93,14 +92,14 @@ def randomAnimal(used_animal_names):
 def emit_all_from_database(channel, sid):
     all_messages = [
         db_message.message for db_message in
-        db.session.query(chatDB.chat_messages).all()        
+        db.session.query(chatDB.chatmessages).all()        
          ]
     print(all_messages)
     socketio.emit(channel, {
         'text': all_messages}, sid)
  
 def add_to_db_and_emit(text):
-    db.session.add(chatDB.chat_messages(text));
+    db.session.add(chatDB.chatmessages(text));
     db.session.commit();
     #emit_all_from_database('messages received')
         
@@ -115,6 +114,7 @@ def on_connect():
     global count
     count += 1
     print('Someone connected!')
+    print(database_uri)
    
 
 @socketio.on('disconnect')
