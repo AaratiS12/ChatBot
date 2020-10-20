@@ -20,7 +20,7 @@ export function Input (props) {
          <div id ="inputArea">
     <form onSubmit={handleSubmit}>
         <label>
-          <input type="text" size="38" value={textBoxValue} onChange={e => updatetextBoxValue(e.target.value)} />
+          <input type="text" size="133" value={textBoxValue} onChange={e => updatetextBoxValue(e.target.value)} />
         </label>
         <input type="submit" value="Submit" />
       </form>
