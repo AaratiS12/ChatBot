@@ -12,9 +12,12 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: python ./tests_chat_bot.py
+          command: python ./unmocked_unit_test.py
           name: Project2 M3 Test
-  
+      - run:
+      name: Wait for Postgres to start
+      command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
       
 workflows:
   main:
