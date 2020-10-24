@@ -6,6 +6,16 @@ import flask_sqlalchemy
 from dotenv import load_dotenv
 dotenv_path = join(dirname(__file__), 'sql.env')
 load_dotenv(dotenv_path)
+
+app = flask.Flask(__name__)
+db = flask_sqlalchemy.SQLAlchemy()
+def init_db(app):
+    db.init_app(app)
+    db.app = app
+    # These should work now too!
+    db.create_all() 
+    db.session.commit() 
+
 #Initializing database
 database_uri = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
@@ -152,6 +162,7 @@ def on_new_data(data):
  
     
 if __name__ == '__main__': 
+    init_db(app)
     socketio.run(
         app,
         host=os.getenv('IP', '0.0.0.0'),
