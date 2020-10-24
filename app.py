@@ -16,15 +16,6 @@ def init_db(app):
     db.create_all() 
     db.session.commit() 
 
-# #Initializing database
-# database_uri = os.environ['DATABASE_URL']
-# app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
-# db = flask_sqlalchemy.SQLAlchemy(app)
-# db.init_app(app)
-# db.app = app
-# db.create_all()
-# db.session.commit()
-
 import flask_socketio
 
 import flask_socketio
