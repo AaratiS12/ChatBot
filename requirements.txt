@@ -2,11 +2,13 @@ astroid==1.6.6
 awscli==1.18.126
 backcall==0.2.0
 botocore==1.17.49
+cachetools==4.1.1
 certifi==2020.6.20
 chardet==3.0.4
 click==7.1.2
 colorama==0.4.3
 contextvars==2.4
+coverage==5.3
 decorator==4.4.2
 Django==2.0.2
 dnspython==1.16.0
@@ -16,6 +18,11 @@ Flask==1.1.2
 Flask-SocketIO==4.3.1
 Flask-SQLAlchemy==2.1
 git-remote-codecommit==1.15.1
+google-api-core==1.23.0
+google-api-python-client==1.12.5
+google-auth==1.22.1
+google-auth-httplib2==0.0.4
+googleapis-common-protos==1.52.0
 googletrans==3.0.0
 greenlet==0.4.17
 h11==0.9.0
@@ -23,6 +30,7 @@ h2==3.2.0
 hpack==3.0.0
 hstspreload==2020.10.6
 httpcore==0.9.1
+httplib2==0.18.1
 httpx==0.13.3
 hyperframe==5.2.0
 idna==2.10
@@ -47,9 +55,11 @@ pbr==5.4.5
 pexpect==4.8.0
 pickleshare==0.7.5
 prompt-toolkit==3.0.6
+protobuf==3.13.0
 psycopg2-binary==2.8.6
 ptyprocess==0.6.0
 pyasn1==0.4.8
+pyasn1-modules==0.2.8
 Pygments==2.6.1
 PyJWT==1.7.1
 pylint==1.8.1
@@ -75,6 +85,7 @@ stevedore==3.2.0
 traitlets==4.3.3
 tweepy==3.9.0
 twilio==6.45.1
+uritemplate==3.0.1
 urllib3==1.25.10
 virtualenv==16.2.0
 virtualenv-clone==0.5.4
