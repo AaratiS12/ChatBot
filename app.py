@@ -1,9 +1,22 @@
-import os
-import flask
-import flask_socketio
 from os.path import join, dirname
-from dotenv import load_dotenv
+import flask
+app = flask.Flask(__name__)
+import os
 import flask_sqlalchemy
+from dotenv import load_dotenv
+dotenv_path = join(dirname(__file__), 'sql.env')
+load_dotenv(dotenv_path)
+#Initializing database
+database_uri = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
+db = flask_sqlalchemy.SQLAlchemy(app)
+db.init_app(app)
+db.app = app
+db.create_all()
+db.session.commit()
+
+import flask_socketio
+
 import flask_socketio
 import chatDB
 import random
@@ -17,17 +30,9 @@ translator = Translator()
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 socketio.init_app(app, cors_allowed_origins="*")
-dotenv_path = join(dirname(__file__), 'sql.env')
-load_dotenv(dotenv_path)
 
-#Initializing database
-database_uri = os.environ['DATABASE_URL']
-app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
-db = flask_sqlalchemy.SQLAlchemy(app)
-db.init_app(app)
-db.app = app
-db.create_all()
-db.session.commit()
+
+
  
 def bot_response_about_help(function):
     if function[0] == "help":
@@ -80,13 +85,6 @@ def bot_response_api(string):
             ret_str = requests.get('https://some-random-api.ml/binary', params=payload).json()['binary']
     
     return(ret_str)
-        
-def randomAnimal(used_animal_names):
-    list_animals = ["duck", "orangutan", "cow", "chicken","horse","fish","zebra","goat","lion","peacock"]
-    random_animal = list_animals[random.randint(0,len(list_animals)-1)]
-    while random_animal in used_animal_names:
-        random_animal = list_animals[random.randint(0,len(list_animals)-1)]
-    return random_animal
     
 #Emits the select * database query
 def emit_all_from_database(channel, sid):
@@ -114,7 +112,6 @@ def on_connect():
     global count
     count += 1
     print('Someone connected!')
-    print(database_uri)
    
 
 @socketio.on('disconnect')
@@ -156,7 +153,6 @@ def on_new_data(data):
         add_to_db_and_emit(msg)
         
     socketio.emit('text received', {
-       #DELETE 'uname': username ,
         'text': msg
     }) 
     if message[0:2] == '!!':
