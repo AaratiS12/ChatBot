@@ -26,24 +26,6 @@ class MockResponse:
 
 class ChatbotTestCase(unittest.TestCase):
     def setUp(self):
-        self.success_test_params = [
-            {
-                KEY_INPUT: "!! help",
-                KEY_EXPECTED: "Type either: \n1)!! translate/funtranslate {text}\n2)!! tamil-translate {text}\n3)!! random-fact\n4)!! text-to-binary {text}\n5)!! help\n6)!! about"
-            },
-            {
-                KEY_INPUT: "!! about me",
-                KEY_EXPECTED: "I am a bot, I will respond to messages that start with !!"
-            },
-            {
-                KEY_INPUT: "!! tamil-translate coconut",
-                KEY_EXPECTED: "தேங்காய்"
-            },
-            {
-                KEY_INPUT: "! tamil-translate coconut",
-                KEY_EXPECTED: "Command not found"
-            },
-        ]
         self.success_test_funtranslate = [
             {
                 KEY_INPUT: "!! funtranslate Master Obiwan has lost a planet.",
@@ -58,6 +40,7 @@ class ChatbotTestCase(unittest.TestCase):
             },
              
         ]
+        
         self.failure_test_params = [
             {
                 KEY_INPUT: "!! tamil-translate coconuts",
@@ -71,12 +54,7 @@ class ChatbotTestCase(unittest.TestCase):
                 KEY_EXPECTED: "Error: text not given" 
             },
         ]
-        self.error_funtranslate_test_params = [
-            {
-                KEY_INPUT: "!! funtranslate",
-                KEY_EXPECTED: "Error: text not given" 
-            },
-            ]
+       
             
         self.success_test_text_to_binary = [
             {
@@ -84,51 +62,13 @@ class ChatbotTestCase(unittest.TestCase):
                 KEY_EXPECTED: "0110100001100101011011000110110001101111" 
             },
             ] 
-         
-        self.failure_test_text_to_binary = [
-            {
-                KEY_INPUT: "!! text-to-binary",
-                KEY_EXPECTED: "Error: text not given" },
-            ]  
             
         self.success_random_fact= [
             {
                 KEY_INPUT: "!! random-fact",
                 KEY_EXPECTED: "In a test performed by Canadian scientists, using various different styles of music, it was determined that chickens lay the most eggs when pop music was played." },
             ]      
-       
-            
-    #UNMOCKED TESTS
-    def test_parse_message_success(self):
-        for test in self.success_test_params:
-            response = app.bot_response_api(test[KEY_INPUT])
-            expected = test[KEY_EXPECTED]
-            self.assertEqual(response, expected)
-            
-    def test_parse_message_failure(self):
-        for test in self.failure_test_params:
-            response = app.bot_response_api(test[KEY_INPUT])
-            expected = test[KEY_EXPECTED]
-            self.assertNotEqual(response, expected)
-            
-    def test_parse_message_error_tamil_translate(self):
-        for test in self.error_tamil_translate_test_params:
-            response = app.bot_response_api(test[KEY_INPUT])
-            expected = test[KEY_EXPECTED]
-            self.assertEqual(response, expected)
-            
-    def test_parse_message_error_funtranslate(self):
-        for test in self.error_funtranslate_test_params:
-            response = app.bot_response_api(test[KEY_INPUT])
-            expected = test[KEY_EXPECTED]
-            self.assertEqual(response, expected)
-            
-    def test_text_to_binary_failure(self):
-        for test_case in self.failure_test_text_to_binary:
-            text_to_binary = bot_response_api(test_case[KEY_INPUT])
-            expected = test_case[KEY_EXPECTED]
-            self.assertEqual(text_to_binary, expected)  
-    
+   
     #MOCKED TESTS
     def mocked_funtranslate_success(self,link, params):
         if link == "https://api.funtranslations.com/translate/yoda.json":
