@@ -31,8 +31,6 @@ app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 socketio.init_app(app, cors_allowed_origins="*")
 
-
-
  
 def bot_response_about_help(function):
     if function[0] == "help":
@@ -53,16 +51,6 @@ def bot_response_api(string):
         else:
             payload = {'text': function[1]}
             ret_str = requests.get('https://api.funtranslations.com/translate/yoda.json', params=payload).json()
-    #         r = {
-    #     "success": {
-    #         "total": 1
-    #     },
-    #     "contents": {
-    #         "translated": "Lost a planet,  master obiwan has.",
-    #         "text": "Master Obiwan has lost a planet.",
-    #         "translation": "yoda"
-    #     }
-    # }
             if "error" not in ret_str:
                 ret_str = ret_str['contents']['translated']
             else:
