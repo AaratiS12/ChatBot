@@ -156,6 +156,27 @@ class ChatbotTestCase(unittest.TestCase):
                 expected = test_case[KEY_EXPECTED]
             self.assertEqual(funtranslate, expected)
             
+    def test_funtranslate_failure(self):
+        for test_case in self.failure_test_funtranslate:
+            with mock.patch('requests.get', self.mocked_funtranslate_failure):
+                funtranslate = bot_response_api(test_case[KEY_INPUT])
+                expected = test_case[KEY_EXPECTED]
+            self.assertEqual(funtranslate, expected)
+               
+    def test_text_to_binary_success(self):
+        for test_case in self.success_test_text_to_binary:
+            with mock.patch('requests.get', self.mocked_text_to_binary_success):
+                text_to_binary = bot_response_api(test_case[KEY_INPUT])
+                expected = test_case[KEY_EXPECTED]
+            self.assertEqual(text_to_binary, expected)
+           
+    def test_random_fact_success(self):
+        for test_case in self.success_random_fact:
+            with mock.patch('requests.get', self.mocked_random_fact_success):
+                text_to_binary = bot_response_api(test_case[KEY_INPUT])
+                expected = test_case[KEY_EXPECTED]
+            self.assertEqual(text_to_binary, expected)
+                 
     
            
 if __name__ == '__main__':
