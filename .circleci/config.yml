@@ -12,9 +12,9 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: sudo service postgresql restart && python ./tests_chat_bot.py
+          command: python ./unmocked_unit_test.py
           name: Project2 M3 Test
-  
+
       
 workflows:
   main:
