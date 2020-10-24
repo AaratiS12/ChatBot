@@ -14,7 +14,9 @@ jobs:
       - run:
           command: python ./tests_chat_bot.py
           name: Project2 M3 Test
-
+  environment:
+      DATABASE_URL=postgresql://aaratis:srikumar@localhost/postgres
+      
 workflows:
   main:
     jobs:
