@@ -10,6 +10,8 @@ load_dotenv(dotenv_path)
 app = flask.Flask(__name__)
 db = flask_sqlalchemy.SQLAlchemy()
 def init_db(app):
+    database_uri = os.environ['DATABASE_URL']
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
     db.init_app(app)
     db.app = app
     # These should work now too!
@@ -32,7 +34,6 @@ app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 socketio.init_app(app, cors_allowed_origins="*")
 
- 
 def bot_response_about_help(function):
     if function[0] == "help":
         return("Type either: \n1)!! translate/funtranslate {text}\n2)!! tamil-translate {text}\n3)!! random-fact\n4)!! text-to-binary {text}\n5)!! help\n6)!! about")
@@ -86,9 +87,9 @@ def emit_all_from_database(channel, sid):
         'text': all_messages}, sid)
  
 def add_to_db_and_emit(text):
-    db.session.add(chatDB.chatmessages(text));
-    db.session.commit();
-    #emit_all_from_database('messages received')
+    print(db.session.add(chatDB.chatmessages(text)));
+    print(db.session.commit());
+   
         
 @app.route('/')
 def hello():
