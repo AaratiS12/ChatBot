@@ -14,7 +14,6 @@ def init_db(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
     db.init_app(app)
     db.app = app
-    # These should work now too!
     db.create_all() 
     db.session.commit() 
 
@@ -78,6 +77,7 @@ def bot_response_api(string):
     
 #Emits the select * database query
 def emit_all_from_database(channel, sid):
+    print(sid)
     all_messages = [
         db_message.message for db_message in
         db.session.query(chatDB.chatmessages).all()        
@@ -87,8 +87,8 @@ def emit_all_from_database(channel, sid):
         'text': all_messages}, sid)
  
 def add_to_db_and_emit(text):
-    print(db.session.add(chatDB.chatmessages(text)));
-    print(db.session.commit());
+    db.session.add(chatDB.chatmessages(text));
+    db.session.commit();
    
         
 @app.route('/')
@@ -154,6 +154,7 @@ def on_new_data(data):
  
     
 if __name__ == '__main__': 
+    print(app)
     init_db(app)
     socketio.run(
         app,
