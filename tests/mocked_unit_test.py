@@ -132,7 +132,7 @@ class SQLObject:
         self.message = message
         
 class Table:
-    def __init__(self, message="1"): ###come back to this
+    def __init__(self, message):
         return
     def all(self):
         return [SQLObject("test message")]
@@ -145,7 +145,7 @@ class SessionObject:
     def commit(self): 
         return
     def query(self, message):
-        return Table()
+        return Table(message)
      
 class db_Test(unittest.TestCase):
     def setUp(self):

@@ -39,5 +39,22 @@
     "react-google-login": "^5.1.21",
     "react-linkify": "^1.0.0-alpha",
     "socket.io-client": "^2.3.1"
-  }
+  },
+  "name": "project2-m3-as3243",
+  "description": "A chat application where chatbot responds to certain commands and users can talk to each other. To use this repository, you must follow these steps:",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/NJIT-CS490/project2-m3-as3243.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NJIT-CS490/project2-m3-as3243/issues"
+  },
+  "homepage": "https://github.com/NJIT-CS490/project2-m3-as3243#readme"
 }
