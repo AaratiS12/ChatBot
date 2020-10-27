@@ -235,6 +235,58 @@ class render_template_test(unittest.TestCase):
             self.assertEqual(response, expected)  
 #__________________________________________________________________________________________                
 #__________________________________________________________________________________________
+
+class RequestObj:
+    def __init__(self):
+        return
+    def sid(self):
+        return "test_sid"
         
+class new_google_user_test(unittest.TestCase):
+    def setUp(self):
+        self.success_google_user = [
+            {
+                KEY_INPUT:{"name":"test data"},
+                KEY_EXPECTED: None
+            },
+        ] 
+    def emit_all_from_db(self, channel, sid):
+        return None
+    def test_render_template(self):
+        for test_case in self.success_google_user:
+            with mock.patch('app.request', RequestObj()):
+                with mock.patch('app.db.session', SessionObject()):
+                    response = on_new_google_user(test_case[ KEY_INPUT])
+                    expected = test_case[KEY_EXPECTED]
+            self.assertEqual(response, expected)   
+#__________________________________________________________________________________________                
+#__________________________________________________________________________________________
+class new_data_test(unittest.TestCase):
+    def setUp(self):
+        self.success_new_data = [
+            {
+                KEY_INPUT:{"new message":"test message"},
+                KEY_EXPECTED: None
+            },
+            {
+                KEY_INPUT:{"new message":"!! about"},
+                KEY_EXPECTED: None
+            },
+        ] 
+    def add_to_db_and_emit(self, msg):
+        return None
+    def test_new_message(self):
+        for test_case in self.success_new_data:
+            with mock.patch('app.request', RequestObj()):
+                with mock.patch('app.db.session', SessionObject()):
+                    
+                    response = on_new_data(test_case[ KEY_INPUT])
+                    expected = test_case[KEY_EXPECTED]
+            self.assertEqual(response, expected)
+                
+                 
+                
+                     
+
 if __name__ == '__main__':
     unittest.main()

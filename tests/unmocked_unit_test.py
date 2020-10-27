@@ -127,7 +127,7 @@ class on_disconnect_test(unittest.TestCase):
             },
         ] 
     
-    def test_on_connect(self):
+    def test_on_disconnect(self):
         for test_case in self.success_on_disconnect:
             response = on_disconnect()
             expected = test_case[KEY_EXPECTED]
