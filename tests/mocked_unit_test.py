@@ -132,10 +132,10 @@ class SQLObject:
         self.message = message
         
 class Table:
-    def __init__(self): ###come back to this
+    def __init__(self, message="1"): ###come back to this
         return
     def all(self):
-        return[SQLObject("test message")]
+        return [SQLObject("test message")]
         
 class SessionObject:
     def __init__(self):
@@ -144,8 +144,8 @@ class SessionObject:
         return
     def commit(self): 
         return
-    def query(self, table):
-        return Table
+    def query(self, message):
+        return Table()
      
 class db_Test(unittest.TestCase):
     def setUp(self):
@@ -163,12 +163,6 @@ class db_Test(unittest.TestCase):
                     expected = test_case[KEY_EXPECTED]
                 self.assertEqual(response, expected)
             
-class DBObjectSession:
-    def __init__(self):
-        return
-    def commit(self):
-        return
-    
 class DBObject:
     def __init__(self):
         return
@@ -196,6 +190,51 @@ class db_Initialize(unittest.TestCase):
                         response = init_db(app)
                         expected = test_case[KEY_EXPECTED]
                 self.assertEqual(response, expected)
+ #__________________________________________________________________________________________                
+ #__________________________________________________________________________________________
+class emit_all_test(unittest.TestCase):
+    def setUp(self):
+        self.success_emit_all = [
+            {
+                KEY_INPUT:["test channel", "test_sid"],
+                KEY_EXPECTED: None
+            },
+        ] 
     
+    def test_emit_all(self):
+        for test_case in self.success_emit_all:
+            with mock.patch('app.db.session', SessionObject()):
+                channel = test_case[KEY_INPUT][0]
+                sid = channel = test_case[KEY_INPUT][1]
+                response = emit_all_from_database(channel,sid)
+                expected = test_case[KEY_EXPECTED]
+            self.assertEqual(response, expected)           
+#__________________________________________________________________________________________                
+#__________________________________________________________________________________________
+
+class FlaskObj:
+    def __init__(self):
+        return
+    def render_template(self, html):
+        return html
+        
+class render_template_test(unittest.TestCase):
+    def setUp(self):
+        self.success_render_template = [
+            {
+                #KEY_INPUT:["test channel", "test_sid"],
+                KEY_EXPECTED: "index.html"
+            },
+        ] 
+    
+    def test_render_template(self):
+        for test_case in self.success_render_template:
+            with mock.patch('app.flask', FlaskObj()):
+                response = hello()
+                expected = test_case[KEY_EXPECTED]
+            self.assertEqual(response, expected)  
+#__________________________________________________________________________________________                
+#__________________________________________________________________________________________
+        
 if __name__ == '__main__':
     unittest.main()

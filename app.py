@@ -87,6 +87,7 @@ def emit_all_from_database(channel, sid):
         'text': all_messages}, sid)
  
 def add_to_db_and_emit(text):
+    print(chatDB.chatmessages(text))
     db.session.add(chatDB.chatmessages(text));
     db.session.commit();
    

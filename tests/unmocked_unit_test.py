@@ -7,7 +7,7 @@ sys.path.append(join(dirname(__file__),".."))
 import unittest
 import app
 import unittest.mock as mock
-from app import bot_response_api
+from app import *
 import json  
 
 KEY_INPUT = "input"
@@ -58,41 +58,42 @@ class ChatbotTestCase(unittest.TestCase):
             },
             ] 
             
+            
              
     #UNMOCKED TESTS
     def test_help_success(self):
         for test in self.success_test_help:
-            helps = app.bot_response_api(test[KEY_INPUT])
+            helps = bot_response_api(test[KEY_INPUT])
             expected = test[KEY_EXPECTED]
             self.assertEqual(helps, expected)
             
     def test_about_me_success(self):
         for test in self.success_test_about_me:
-            about_me = app.bot_response_api(test[KEY_INPUT])
+            about_me = bot_response_api(test[KEY_INPUT])
             expected = test[KEY_EXPECTED]
             self.assertEqual(about_me, expected)
-            
+           
     def test_tamil_translate_success(self):
         for test in self.success_test_tamil_translate:
-            tamil_translate = app.bot_response_api(test[KEY_INPUT])
+            tamil_translate = bot_response_api(test[KEY_INPUT])
             expected = test[KEY_EXPECTED]
             self.assertEqual(tamil_translate, expected) 
             
     def test_tamil_translate_failure(self):
         for test in self.failure_test_tamil_translate:
-            tamil_translate = app.bot_response_api(test[KEY_INPUT])
+            tamil_translate = bot_response_api(test[KEY_INPUT])
             expected = test[KEY_EXPECTED]
             self.assertEqual(tamil_translate, expected)
-            
+          
     def test_parse_message_error_tamil_translate(self):
         for test in self.error_tamil_translate_test_params:
-            tamil_translate = app.bot_response_api(test[KEY_INPUT])
+            tamil_translate = bot_response_api(test[KEY_INPUT])
             expected = test[KEY_EXPECTED]
             self.assertEqual(tamil_translate, expected)
             
     def test_parse_message_error_funtranslate(self):
         for test in self.error_funtranslate_test_params:
-            funtranslate = app.bot_response_api(test[KEY_INPUT])
+            funtranslate = bot_response_api(test[KEY_INPUT])
             expected = test[KEY_EXPECTED]
             self.assertEqual(funtranslate, expected)
             
@@ -101,7 +102,37 @@ class ChatbotTestCase(unittest.TestCase):
             text_to_binary = bot_response_api(test_case[KEY_INPUT])
             expected = test_case[KEY_EXPECTED]
             self.assertEqual(text_to_binary, expected)  
+#__________________________________________________________________________________________                
+#__________________________________________________________________________________________
+class on_connect_test(unittest.TestCase):
+    def setUp(self):
+        self.success_on_connect = [
+            {
+                KEY_EXPECTED: None
+            },
+        ] 
     
+    def test_on_connect(self):
+        for test_case in self.success_on_connect:
+            response = on_connect()
+            expected = test_case[KEY_EXPECTED]
+            self.assertEqual(response, expected)  
+#__________________________________________________________________________________________                
+#__________________________________________________________________________________________
+class on_disconnect_test(unittest.TestCase):
+    def setUp(self):
+        self.success_on_disconnect = [
+            {
+                KEY_EXPECTED: None
+            },
+        ] 
+    
+    def test_on_connect(self):
+        for test_case in self.success_on_disconnect:
+            response = on_disconnect()
+            expected = test_case[KEY_EXPECTED]
+            self.assertEqual(response, expected) 
+  
   
     
             
