@@ -12,7 +12,7 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: python ./unmocked_unit_test.py &&  python ./mocked_unit_test.py
+          command: python ./tests/unmocked_unit_test.py &&  python ./tests/mocked_unit_test.py
           name: Project2 M3 Test
 
       
