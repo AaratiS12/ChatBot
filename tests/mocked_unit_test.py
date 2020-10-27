@@ -8,7 +8,7 @@ from app import bot_response_api
 from app import *
 from app import db
 import json  
-from alchemy_mock.mocking import UnifiedAlchemyMagicMock
+
 
 
 KEY_INPUT = "input"
