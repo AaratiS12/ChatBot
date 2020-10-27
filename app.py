@@ -13,11 +13,6 @@ from googletrans import Translator
 import requests
 import flask
 from flask import request
-import chatDB
-
-
-app = flask.Flask(__name__)
-
 
 
 dotenv_path = join(dirname(__file__), "sql.env")
@@ -35,17 +30,7 @@ def init_db(app):
     db.app = app
     db.create_all()
     db.session.commit()
-
-
-
-
-
-
-
-
-
-
-
+import chatDB
 translator = Translator()
 
 # Initializing
