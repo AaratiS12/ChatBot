@@ -1,6 +1,8 @@
 
 # Senior Capstone (CS490) Project2
 A Chat WebApp where users login and chat with other users, and the chatbot responds to certain commands.
+
+Language/Technologies Used: **SocketIO, React, GoogleOauth, SQLAlchemy, Postgres, NPM,  Flask, Google Translate, Heroku, Linkify, Python**
 ## View this app at: https://thunderous-clouds-4232.herokuapp.com/
 To use this repository, you must follow these steps:
 ## Initital Setup
