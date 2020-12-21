@@ -1,5 +1,5 @@
 
-# Senior Capstone (CS490) Project2
+# ChatBot
 A Chat WebApp where users login and chat with other users, and the chatbot responds to certain commands.
 
 Language/Technologies Used: **SocketIO, React, GoogleOauth, SQLAlchemy, Postgres, NPM,  Flask, Google Translate, Heroku, Linkify, Python**
